@@ -57,4 +57,6 @@ if [ -n "$BUILD_THUMBPRINT" ] ; then
   echo "ro.build.thumbprint=$BUILD_THUMBPRINT"
 fi
 
+echo "ro.spark.device=$SPARK_DEVICE"
+
 echo "# end build properties"
