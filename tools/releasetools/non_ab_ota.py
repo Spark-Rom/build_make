@@ -212,6 +212,29 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("Target: {}".format(target_info.fingerprint))
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
+
+  is_gapps = target_info.GetBuildProp("ro.spark.version").endswith("-gapps")
+  androidver = target_info.GetBuildProp("ro.build.version.release")
+  sparkver = target_info.GetBuildProp("ro.spark.build.version")
+  build_id = target_info.GetBuildProp("ro.build.id")
+  build_date = target_info.GetBuildProp("ro.spark.build.date")
+  securitypatch = target_info.GetBuildProp("ro.build.version.security_patch")
+  sparkdevice = target_info.GetBuildProp("ro.spark.device")
+
+  script.Print("--------------------------------------------")
+  script.Print("                SparkOS                     ")
+  script.Print("--------------------------------------------")
+  script.Print("Android Version: %s"%(androidver))
+  script.Print("Spark Version: %s"%(sparkver))
+  script.Print("Build ID: %s"%(build_id))
+  script.Print("Build Date: %s"%(build_date))
+  script.Print("Security Patch: %s"%(securitypatch))
+  script.Print("Device: %s"%(sparkdevice))
+  if is_gapps:
+    script.Print("GApps Build: Yes")
+  else:
+    script.Print("GApps Build: No")
+
   device_specific.FullOTA_InstallBegin()
 
   # All other partitions as well as the data wipe use 10% of the progress, and
