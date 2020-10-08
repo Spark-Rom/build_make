@@ -2675,7 +2675,16 @@ ifneq (,$(filter address, $(SANITIZE_TARGET)))
   endif
 endif
 
-FULL_SYSTEMIMAGE_DEPS += $(INTERNAL_ROOT_FILES) $(INSTALLED_FILES_FILE_ROOT)
+.PHONY: systemimage-changelog
+ifneq (1,$(USER_BUILD_NO_CHANGELOG))
+systemimage-changelog:
+	@echo "Making changelog! for your latest Spark build"
+	./vendor/spark/tools/changelog $(PRODUCT_OUT)
+
+endif
+CHANGELOG := systemimage-changelog
+
+FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS)
 
 # -----------------------------------------------------------------
 ifdef BUILDING_SYSTEM_IMAGE
@@ -4651,7 +4660,8 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(MAKE_RECOVERY_PATCH) \
 	    $(BUILT_KERNEL_CONFIGS_FILE) \
 	    $(BUILT_KERNEL_VERSION_FILE) \
-	    | $(ACP)
+	    | $(ACP) \
+	    $(CHANGELOG)
 	@echo "Package target files: $@"
 	$(call create-system-vendor-symlink)
 	$(call create-system-product-symlink)
