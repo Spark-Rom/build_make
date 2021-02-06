@@ -814,6 +814,17 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # All other partitions as well as the data wipe use 10% of the progress, and
   # the update of the system partition takes the remaining progress.
   system_progress = 0.9 - (len(block_diff_dict) - 1) * 0.1
+
+  script.Print("*******************************************");
+  script.Print("*   _________                   __        *")
+  script.Print("*  /   _____/__________ _______|  | __    *")
+  script.Print("*  \_____  \\____ \__  \\_  __ \  |/ /    *")
+  script.Print("*  /        \  |_> > __ \|  | \/    <     *")
+  script.Print("*  /_______ /   __(____ /__|  |__|_ \     *")
+  script.Print("*         \/|__|      \/           \/     *")
+  script.Print("*downloads.spark-os.live burst into flames*")
+  script.Print("*******************************************");
+
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
   progress_dict = {partition: 0.1 for partition in block_diff_dict}
