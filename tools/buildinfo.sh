@@ -56,5 +56,3 @@ fi
 echo "ro.spark.device=$SPARK_DEVICE"
 
 echo "# end build properties"
-
-VEN_INFO=vendor/spark/build/tools/buildinfo.sh && test -f $VEN_INFO && source $VEN_INFO
