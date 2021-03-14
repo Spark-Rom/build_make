@@ -806,7 +806,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Comment("Stage 3/3")
 
   # Dump fingerprints
-  script.Print("Target: {}".format(target_info.fingerprint))
+  script.Print("Installing SparkOs on {}. Hold tight!".format(target_info.GetBuildProp("ro.build.product")))
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
@@ -815,15 +815,22 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # the update of the system partition takes the remaining progress.
   system_progress = 0.9 - (len(block_diff_dict) - 1) * 0.1
 
-  script.Print("*******************************************");
-  script.Print("*   _________                   __        *")
-  script.Print("*  /   _____/__________ _______|  | __    *")
-  script.Print("*  \_____  \\____ \__  \\_  __ \  |/ /    *")
-  script.Print("*  /        \  |_> > __ \|  | \/    <     *")
-  script.Print("*  /_______ /   __(____ /__|  |__|_ \     *")
-  script.Print("*         \/|__|      \/           \/     *")
-  script.Print("*downloads.spark-os.live burst into flames*")
-  script.Print("*******************************************");
+  script.Print("*********************************************");
+  script.Print("*   _________                   __          *")
+  script.Print("*  /   _____/__________ _______|  | __      *")
+  script.Print("*  \_____  \\____ \__  \\_  __ \  |/ /      *")
+  script.Print("*  /        \  |_> > __ \|  | \/     <      *")
+  script.Print("*  /_______ /   __(____ /__|  |__|_ \       *")
+  script.Print("*         \/|__|      \/           \/       *")
+  script.Print("* downloads.spark-os.live burst into flames *")
+  script.Print("*********************************************");
+  script.Print("Device : {}".format(target_info.GetBuildProp("ro.product.system.model")))
+  script.Print("SparkOs version: {}".format(target_info.GetBuildProp("ro.spark.branding.version")))
+  script.Print("Android version : {}".format(target_info.GetBuildProp("ro.build.version.release")))
+  script.Print("Build Status: {}".format(target_info.GetBuildProp("ro.spark.build.type")))
+  script.Print("Build Variant: {}".format(target_info.GetBuildProp("ro.spark.build.variant")))
+  script.Print("Build fingerprint: {}".format(target_info.fingerprint))
+  script.Print("Security patch : {}".format(target_info.GetBuildProp("ro.build.version.security_patch")))
 
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
