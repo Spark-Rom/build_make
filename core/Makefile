@@ -2677,12 +2677,14 @@ ifneq (,$(filter address, $(SANITIZE_TARGET)))
 endif
 
 .PHONY: systemimage-changelog
-ifneq (1,$(USER_BUILD_NO_CHANGELOG))
 systemimage-changelog:
-	@echo "Making changelog! for your latest Spark build"
-	./vendor/spark/tools/changelog $(PRODUCT_OUT)
-
+ifneq (1,$(USER_BUILD_NO_CHANGELOG))
+	@echo "Making changelog for your Spark Build!"
+	./vendor/spark/build/tools/changelog.sh $(PRODUCT_OUT)
+else
+	@echo "Skipping changelog!"
 endif
+
 CHANGELOG := systemimage-changelog
 
 FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS)
