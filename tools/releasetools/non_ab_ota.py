@@ -228,7 +228,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   sparkver = target_info.GetBuildProp("ro.spark.build.version")
   build_id = target_info.GetBuildProp("ro.build.id")
   build_date = target_info.GetBuildProp("ro.spark.build.date")
-  securitypatch = target_info.GetBuildProp("ro.build.version.security_patch")
+  securitypatch = target_info.GetBuildProp("ro.spark.build_security_patch")
   sparkdevice = target_info.GetBuildProp("ro.spark.device")
 
   script.Print("--------------------------------------------")
