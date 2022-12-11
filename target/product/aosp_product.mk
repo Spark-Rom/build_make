@@ -26,12 +26,13 @@ $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackage14.mk)
 endif
 
 # Additional settings used in all AOSP builds
+ifeq ($(SPARK_BUILD),)
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.config.ringtone?=Ring_Synth_04.ogg \
     ro.config.notification_sound?=pixiedust.ogg \
-
-PRODUCT_PRODUCT_PROPERTIES += \
     ro.com.android.dataroaming?=true \
+
+endif
 
 # More AOSP packages
 PRODUCT_PACKAGES += \
